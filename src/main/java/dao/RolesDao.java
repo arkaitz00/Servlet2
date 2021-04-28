@@ -1,5 +1,5 @@
 package main.java.dao;
 
-public class RolDao {
+public class RolesDao {
 
 }

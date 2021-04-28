@@ -14,11 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import main.java.dao.UsuariosDao;
+import main.java.entities.Usuarios;
+import main.java.utils.HibernateUtil;
 
 /**
  * Servlet implementation class Login
@@ -28,7 +33,7 @@ public class Login extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	static Logger logger = LogManager.getLogger(Login.class);
-	SessionFactory sessionFactory;
+	Session s;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,26 +47,33 @@ public class Login extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		sessionFactory = buildSessionFactory();
+		s = HibernateUtil.getSessionFactory().openSession();
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String usuario, password;
 		PrintWriter out = response.getWriter();
 		
 		usuario = request.getParameter("usuario");
 		password = request.getParameter("password");
 		
-		if(usuario.equals("admin@tiendaonline.es") && password.equals("1234")){
-			out.println("<h1>Se ha iniciado sesion correctamente</h1>");
-			out.println("<p>Hola "+usuario+"</p>");
-			out.println("<br>");
-			out.println("Ultima sesion iniciada "+LocalDate.now());
+		Usuarios u = UsuariosDao.devolverUsuarioEmail(s, usuario);
+		
+		if(u != null) {
+			if(password.equals(u.getClave())){
+				out.println("<h1>Se ha iniciado sesion correctamente</h1>");
+				out.println("<p>Hola "+usuario+"</p>");
+				out.println("<br>");
+				out.println("Ultima sesion iniciada "+LocalDate.now());
+			}else {
+				out.println("<h1>No se ha iniciado sesion correctamente</h1>");
+			}
 		}else {
-			out.println("<h1>No se ha iniciado sesion correctamente</h1>");
+			logger.warn("El usuario no existe");
+			out.println("<h1>No se ha iniciado sesion el usuario no existe</h1>");
 		}
 	}
 
