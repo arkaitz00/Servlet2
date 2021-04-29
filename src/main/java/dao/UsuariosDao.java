@@ -3,21 +3,23 @@ package main.java.dao;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import main.java.entities.Roles;
 import main.java.entities.Usuarios;
 
 public class UsuariosDao {
 	
 	static Logger logger = LogManager.getLogger(UsuariosDao.class);
 	
-	public static boolean consultarUsuario(Session s, int idCliente) {
-		String hql = "from Usuarios u where u.id = :idCliente";
-		
-		if(s.createQuery(hql, Usuarios.class) != null) {
+	public static boolean consultarUsuario(Session s, String dni) {
+		String hql = "from Usuarios u where dni = :dni";
+		Usuarios u = s.createQuery(hql, Usuarios.class).setParameter("dni", dni).setMaxResults(1).uniqueResult();
+		if(u != null) {
 			logger.info("Se ha encontrado el usuario");
 			return true;
 		}
-		logger.warn("No se ha encontrado el usuario");
+		logger.info("No se ha encontrado el usuario");
 		return false;
 	}
 	
@@ -32,5 +34,26 @@ public class UsuariosDao {
 		}
 		
 		return u;
+	}
+	
+	public static boolean insertarUsuario(Session s, int rol, String email, String password, String nombre, String apellido1, String apellido2, String direccion, String localidad, String provincia, String telefono, String dni) {
+		boolean correcto = false;
+		Transaction t = s.beginTransaction();
+		try {
+			Usuarios u = new Usuarios(rol, email, password, nombre, apellido1, apellido2, direccion, localidad, provincia, telefono, dni);
+			if(!UsuariosDao.consultarUsuario(s, u.getDni())) {
+				s.save(u);
+				t.commit();
+				logger.info("Usuario creado");
+				correcto = true;
+			}else {
+				logger.warn("El usuario ya existe");
+			}
+		}catch(Exception ex) {
+			logger.error(ex);
+			t.rollback();
+		}
+		s.close();
+		return correcto;
 	}
 }
