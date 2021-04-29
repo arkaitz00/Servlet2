@@ -1,4 +1,4 @@
-package main.java.servlet;
+package main.java.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +14,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.dao.RolesDao;
+import main.java.model.dao.RolesDao;
 import main.java.utils.HibernateUtil;
 
 /**

@@ -1,4 +1,4 @@
-package main.java.entities;
+package main.java.model.entities;
 
 // default package
 // Generated 28-abr-2021 18:44:31 by Hibernate Tools 5.2.12.Final

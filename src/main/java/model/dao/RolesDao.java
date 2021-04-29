@@ -1,4 +1,4 @@
-package main.java.dao;
+package main.java.model.dao;
 
 import java.util.List;
 
@@ -7,8 +7,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import main.java.entities.Roles;
-import main.java.entities.Usuarios;
+import main.java.model.entities.Roles;
 
 public class RolesDao {
 

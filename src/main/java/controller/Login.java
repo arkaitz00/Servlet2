@@ -1,4 +1,4 @@
-package main.java.servlet;
+package main.java.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +21,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import main.java.dao.UsuariosDao;
-import main.java.entities.Usuarios;
+import main.java.model.dao.UsuariosDao;
+import main.java.model.entities.Usuarios;
 import main.java.utils.HibernateUtil;
 
 /**
