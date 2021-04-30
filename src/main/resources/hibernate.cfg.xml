@@ -7,7 +7,7 @@
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/tienda_online</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<mapping class="main.java.entities.Roles"/>
-		<mapping class="main.java.entities.Usuarios"/>
+		<mapping class="main.java.model.entities.Roles"/>
+		<mapping class="main.java.model.entities.Usuarios"/>
     </session-factory>
 </hibernate-configuration>

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -54,6 +55,15 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		// TODO Auto-generated method stub
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String usuario, password;
 		PrintWriter out = response.getWriter();
 		
@@ -64,25 +74,16 @@ public class Login extends HttpServlet {
 		
 		if(u != null) {
 			if(password.equals(u.getClave())){
-				out.println("<h1>Se ha iniciado sesion correctamente</h1>");
-				out.println("<p>Hola "+usuario+"</p>");
-				out.println("<br>");
-				out.println("Ultima sesion iniciada "+LocalDate.now());
+				HttpSession session = request.getSession(true);
+				session.setAttribute("nombreUsuario", u.getNombre());
+				response.sendRedirect("Bienvenido.jsp");
 			}else {
-				out.println("<h1>No se ha iniciado sesion correctamente</h1>");
+				response.sendRedirect("Login.jsp");
 			}
 		}else {
 			logger.warn("El usuario no existe");
-			out.println("<h1>No se ha iniciado sesion el usuario no existe</h1>");
+			response.sendRedirect("Login.jsp");
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 	
 	private static SessionFactory buildSessionFactory() {

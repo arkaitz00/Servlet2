@@ -53,7 +53,6 @@ public class UsuariosDao {
 			logger.error(ex);
 			t.rollback();
 		}
-		s.close();
 		return correcto;
 	}
 }
