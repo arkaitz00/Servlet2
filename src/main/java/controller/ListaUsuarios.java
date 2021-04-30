@@ -1,6 +1,7 @@
 package main.java.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,30 +14,23 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import main.java.model.dao.UsuariosDao;
-import main.java.model.entities.Usuarios;
 import main.java.utils.HibernateUtil;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class ListaUsuarios
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
-	
+@WebServlet("/ListaUsuarios")
+public class ListaUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger logger = LogManager.getLogger(Login.class);
-	Session s;
-       
+	Session s = HibernateUtil.getSessionFactory().openSession();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public ListaUsuarios() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,13 +39,13 @@ public class Login extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		s = HibernateUtil.getSessionFactory().openSession();
+		
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
@@ -60,26 +54,16 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String usuario, password;
-		
-		usuario = request.getParameter("usuario");
-		password = request.getParameter("password");
-		
-		Usuarios u = UsuariosDao.devolverUsuarioEmail(s, usuario);
-		
-		if(u != null) {
-			if(password.equals(u.getClave())){
-				HttpSession session = request.getSession(true);
-				session.setAttribute("rolUsuario", u.getRoles());
-				session.setAttribute("nombreUsuario", u.getNombre());
-				response.sendRedirect("Bienvenido.jsp");
-			}else {
-				response.sendRedirect("Login.jsp");
-			}
+		List lista = UsuariosDao.listaUsuarios(s);
+		if(lista.size() != 0) {
+			logger.info("La lista contiene usuarios");
+			HttpSession session = request.getSession(true);
+			session.setAttribute("listaUsuarios", lista);
+			response.sendRedirect("ListaUsuarios.jsp");
 		}else {
-			logger.warn("El usuario no existe");
-			response.sendRedirect("Login.jsp");
+			logger.warn("La lista esta vacia");
+			response.sendRedirect("Bienvenido.jsp");
 		}
 	}
+
 }

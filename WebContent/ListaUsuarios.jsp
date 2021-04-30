@@ -13,7 +13,7 @@
 		<div class="grid-container">
 			<%@ include file="Navegacion.jsp" %>
 			<div class="Article">
-				<table style="width:100%; margin-top:5%; text-align:center;">
+				<table style="width:100%; margin-top:5%; text-align:center; ">
 					<tr>
 						<th>Correo</th>
 						<th>Nombre</th>
