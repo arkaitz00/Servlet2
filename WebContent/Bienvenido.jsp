@@ -63,13 +63,13 @@
 	%>
 	
 	<div class="grid-container">
-	  <div class="Nav"><h1 style="text-align:center;">Bienvenido a la tienda de Arkaitz</h1></div>
+	  <%@ include file="Navegacion.jsp" %>
 	  <div class="Aside"></div>
 	  <div class="Section"></div>
 	  <div class="Article">
 	  	<p>Bienvenido ${sessionScope.nombreUsuario}.</p>
 	  	<p>Ultima sesion iniciada: <%= fechaActual.getDayOfMonth() + " de " + mes(fechaActual.getMonthValue()) + " de " + fechaActual.getYear() %> 
-	a las <%= fechaActual.getHour()+":"+fechaActual.getMinute() %></p>
+			a las <%= fechaActual.getHour()+":"+fechaActual.getMinute()%></p>
 	  </div>
 	  <%@ include file="Footer.jsp" %>
 	</div>

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="login">
+	<div class="registrarte">
 		<h1>Registrarse</h1>
 	    <form method="post" action="AltaUsuario">
 	    	<input type="text" name="email" placeholder="Email" required="required">

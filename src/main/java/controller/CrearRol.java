@@ -58,9 +58,9 @@ public class CrearRol extends HttpServlet {
 		String nombre = request.getParameter("nombreRol");
 		
 		if(RolesDao.insertarRol(s, idRol, nombre)) {
-			out.println("<h1>Se ha creado el rol correctamente</h1>");
+			response.sendRedirect("Bienvenido.jsp");
 		}else {
-			out.println("<h1>No se ha podido crear el rol correctamente</h1>");
+			response.sendRedirect("VistaRol.jsp");
 		}
 	}
 

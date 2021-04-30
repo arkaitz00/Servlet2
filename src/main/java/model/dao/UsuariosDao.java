@@ -1,5 +1,7 @@
 package main.java.model.dao;
 
+import java.util.List;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -54,5 +56,12 @@ public class UsuariosDao {
 			t.rollback();
 		}
 		return correcto;
+	}
+	
+	public static List<Usuarios> listaUsuarios(Session s){
+		List<Usuarios> lista;
+		String hql = "from Usuarios";
+		lista = s.createQuery(hql, Usuarios.class).list();
+		return lista;		
 	}
 }
