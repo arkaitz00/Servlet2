@@ -1,9 +1,6 @@
 package main.java.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.util.Date;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -65,7 +62,6 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String usuario, password;
-		PrintWriter out = response.getWriter();
 		
 		usuario = request.getParameter("usuario");
 		password = request.getParameter("password");
@@ -85,19 +81,4 @@ public class Login extends HttpServlet {
 			response.sendRedirect("Login.jsp");
 		}
 	}
-	
-	private static SessionFactory buildSessionFactory() {
-		String methodName = Login.class.getSimpleName() + ".buildSessionFactory()";
-
-		final StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-
-		try {
-			Metadata metadata = new MetadataSources(standardRegistry).getMetadataBuilder().build();
-			SessionFactory sessionFactory= metadata.getSessionFactoryBuilder().build();
-			return sessionFactory;
-		} catch (Exception ex) {
-			throw new ExceptionInInitializerError(ex);
-		}
-	}
-
 }

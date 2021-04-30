@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -47,7 +48,14 @@ public class AltaUsuario extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
+		// TODO Auto-generated method stub
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String nombre = request.getParameter("usuario");
 		String password = request.getParameter("password");
@@ -60,24 +68,18 @@ public class AltaUsuario extends HttpServlet {
 		String telefono = request.getParameter("telefono");
 		String dni = request.getParameter("dni");
 		int roles = Integer.parseInt(rol);
-		logger.info(nombre);
 		if(RolesDao.consultarRol(s, roles)) {
 			if(UsuariosDao.insertarUsuario(s, roles, email, password, nombre, apellido1, apellido2, direccion, localidad, provincia, telefono, dni)) {
-				out.println("<h1>Se ha creado el usuario correctamente</h1>");
+				HttpSession session = request.getSession(true);
+				session.setAttribute("nombreUsuario", nombre);
+				response.sendRedirect("Bienvenido.jsp");
 			}else {
-				out.println("<h1>No se ha podido crear el usuario correctamente</h1>");
+				response.sendRedirect("Registro.jsp");
 			}
 		}else {
-			out.println("<h1>El rol no existe</h1>");
+			response.sendRedirect("Registro.jsp");
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

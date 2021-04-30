@@ -3,7 +3,7 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="main.java.model.entities.*, main.java.model.dao.*" %>
+<%@ page import="main.java.model.entities.*, main.java.model.dao.*, main.java.controller.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -11,10 +11,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Tienda Arkaitz</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<p>Bienvenido ${sessionScope.nombreUsuario}.</p>
-	<br>
 	<%! //Metodo para sacar el nombre del mes
 		public String mes(int numeroMes){
 			String mes = "";
@@ -61,9 +60,18 @@
 	%>
 	<%  //Objeto para sacar la fecha
 	    LocalDateTime fechaActual = LocalDateTime.now();
-		
 	%>
-	<p>Ultima sesion iniciada: <%= fechaActual.getDayOfMonth() %> de <%= mes(fechaActual.getMonthValue()) %> de <%= fechaActual.getYear() %> 
+	
+	<div class="grid-container">
+	  <div class="Nav"><h1 style="text-align:center;">Bienvenido a la tienda de Arkaitz</h1></div>
+	  <div class="Aside"></div>
+	  <div class="Section"></div>
+	  <div class="Article">
+	  	<p>Bienvenido ${sessionScope.nombreUsuario}.</p>
+	  	<p>Ultima sesion iniciada: <%= fechaActual.getDayOfMonth() + " de " + mes(fechaActual.getMonthValue()) + " de " + fechaActual.getYear() %> 
 	a las <%= fechaActual.getHour()+":"+fechaActual.getMinute() %></p>
+	  </div>
+	  <%@ include file="Footer.jsp" %>
+	</div>
 </body>
 </html>

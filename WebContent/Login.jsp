@@ -8,6 +8,18 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<%@ include file="Login.html" %>
+	<div class="login">
+		<h1>Login</h1>
+	    <form method="post" action="Login">
+	    	<input type="text" name="usuario" placeholder="Username"/>
+	        <input type="password" name="password" placeholder="Password"/>
+	        <button type="submit" class="btn btn-primary btn-block btn-large">Iniciar Sesion</button>
+	        <br>
+	    </form>
+	    <form method="post" action="Registro.jsp">
+	    	<button type="submit" class="btn btn-primary btn-block btn-large" name="registrate">Registrate</button>
+	    </form>
+	</div>
+	<%@ include file="Footer.jsp" %>
 </body>
 </html>

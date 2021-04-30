@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,7 @@
 <body>
 	<div class="login">
 		<h1>Registrarse</h1>
-	    <form method="post" action="http://localhost:8080/EjercicioServlet2/AltaUsuario">
+	    <form method="post" action="AltaUsuario">
 	    	<input type="text" name="email" placeholder="Email" required="required">
 	        <input type="password" name="password" placeholder="Password" required="required" />
 	        <input type="text" name="usuario" placeholder="usuario" required="required">
@@ -21,7 +23,12 @@
 	        <input type="text" name="telefono" placeholder="telefono" required="required">
 	        <input type="text" name="dni" placeholder="dni" required="required">
 	        <button type="submit" class="btn btn-primary btn-block btn-large">Registrarse</button>
+	        <br>
+	    </form>
+	    <form method="post" action="Login.jsp">
+	    	<button type="submit" class="btn btn-primary btn-block btn-large">¡Ya tengo cuenta!</button>
 	    </form>
 	</div>
+	<%@ include file="Footer.jsp" %>
 </body>
 </html>
