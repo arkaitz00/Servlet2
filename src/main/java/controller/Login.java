@@ -18,10 +18,16 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.jasypt.util.password.PasswordEncryptor;
 
 import main.java.model.dao.UsuariosDao;
 import main.java.model.entities.Usuarios;
+import main.java.service.UsuariosService;
+import main.java.utils.Cifrado;
 import main.java.utils.HibernateUtil;
+import main.java.utils.MetodosUtiles;
 
 /**
  * Servlet implementation class Login
@@ -66,12 +72,13 @@ public class Login extends HttpServlet {
 		usuario = request.getParameter("usuario");
 		password = request.getParameter("password");
 		
-		Usuarios u = UsuariosDao.devolverUsuarioEmail(s, usuario);
 		
+		
+		Usuarios u = UsuariosDao.devolverUsuarioEmail(s, usuario);
 		if(u != null) {
-			if(password.equals(u.getClave())){
+			if(Cifrado.comprobarCifrado(password, u.getClave())){
 				HttpSession session = request.getSession(true);
-				session.setAttribute("rolUsuario", u.getRoles());
+				session.setAttribute("rolUsuario", MetodosUtiles.nombreRol(u.getRoles()));
 				session.setAttribute("nombreUsuario", u.getNombre());
 				response.sendRedirect("Bienvenido.jsp");
 			}else {
@@ -81,5 +88,5 @@ public class Login extends HttpServlet {
 			logger.warn("El usuario no existe");
 			response.sendRedirect("Login.jsp");
 		}
-	}
+	}	
 }

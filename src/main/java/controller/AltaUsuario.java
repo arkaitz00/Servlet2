@@ -15,9 +15,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.jasypt.util.password.PasswordEncryptor;
 
 import main.java.model.dao.RolesDao;
 import main.java.model.dao.UsuariosDao;
+import main.java.utils.Cifrado;
 import main.java.utils.HibernateUtil;
 
 /**
@@ -56,6 +60,9 @@ public class AltaUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PasswordEncryptor encriptado = new BasicPasswordEncryptor();
+		
 		String email = request.getParameter("email");
 		String nombre = request.getParameter("usuario");
 		String password = request.getParameter("password");
@@ -68,8 +75,10 @@ public class AltaUsuario extends HttpServlet {
 		String telefono = request.getParameter("telefono");
 		String dni = request.getParameter("dni");
 		int roles = Integer.parseInt(rol);
+		
+		String passwordCifrado = Cifrado.cifrar(password);
 		if(RolesDao.consultarRol(s, roles)) {
-			if(UsuariosDao.insertarUsuario(s, roles, email, password, nombre, apellido1, apellido2, direccion, localidad, provincia, telefono, dni)) {
+			if(UsuariosDao.insertarUsuario(s, roles, email, passwordCifrado, nombre, apellido1, apellido2, direccion, localidad, provincia, telefono, dni)) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("nombreUsuario", nombre);
 				response.sendRedirect("Bienvenido.jsp");

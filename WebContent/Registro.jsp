@@ -15,12 +15,12 @@
 	        <input type="password" name="password" placeholder="Password" required="required" />
 	        <input type="text" name="usuario" placeholder="usuario" required="required">
 	        <input type="number" name="rol" placeholder="rol" required="required">
-	        <input type="text" name="apellido1" placeholder="apellido1" required="required">
-	        <input type="text" name="apellido2" placeholder="apellido2" required="required">
-	        <input type="text" name="direccion" placeholder="direccion" required="required">
-	        <input type="text" name="localidad" placeholder="localidad" required="required">
-	        <input type="text" name="provincia" placeholder="provincia" required="required">
-	        <input type="text" name="telefono" placeholder="telefono" required="required">
+	        <input type="text" name="apellido1" placeholder="apellido1">
+	        <input type="text" name="apellido2" placeholder="apellido2">
+	        <input type="text" name="direccion" placeholder="direccion">
+	        <input type="text" name="localidad" placeholder="localidad" >
+	        <input type="text" name="provincia" placeholder="provincia">
+	        <input type="text" name="telefono" placeholder="telefono">
 	        <input type="text" name="dni" placeholder="dni" required="required">
 	        <button type="submit" class="btn btn-primary btn-block btn-large">Registrarse</button>
 	        <br>
