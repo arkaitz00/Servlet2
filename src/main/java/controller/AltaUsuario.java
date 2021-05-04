@@ -23,6 +23,7 @@ import main.java.model.dao.RolesDao;
 import main.java.model.dao.UsuariosDao;
 import main.java.utils.Cifrado;
 import main.java.utils.HibernateUtil;
+import main.java.utils.MetodosUtiles;
 
 /**
  * Servlet implementation class AltaUsuario
@@ -66,7 +67,6 @@ public class AltaUsuario extends HttpServlet {
 		String email = request.getParameter("email");
 		String nombre = request.getParameter("usuario");
 		String password = request.getParameter("password");
-		String rol = request.getParameter("rol");
 		String apellido1 = request.getParameter("apellido1");
 		String apellido2 = request.getParameter("apellido2");
 		String direccion = request.getParameter("direccion");
@@ -74,13 +74,13 @@ public class AltaUsuario extends HttpServlet {
 		String provincia = request.getParameter("provincia");
 		String telefono = request.getParameter("telefono");
 		String dni = request.getParameter("dni");
-		int roles = Integer.parseInt(rol);
 		
 		String passwordCifrado = Cifrado.cifrar(password);
-		if(RolesDao.consultarRol(s, roles)) {
-			if(UsuariosDao.insertarUsuario(s, roles, email, passwordCifrado, nombre, apellido1, apellido2, direccion, localidad, provincia, telefono, dni)) {
+		if(RolesDao.consultarRol(s, 2)) {
+			if(UsuariosDao.insertarUsuario(s, 2, email, passwordCifrado, nombre, apellido1, apellido2, direccion, localidad, provincia, telefono, dni)) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("nombreUsuario", nombre);
+				session.setAttribute("rolUsuario", MetodosUtiles.nombreRol(1));
 				response.sendRedirect("Bienvenido.jsp");
 			}else {
 				response.sendRedirect("Registro.jsp");

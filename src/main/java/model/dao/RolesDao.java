@@ -35,7 +35,7 @@ public class RolesDao {
 		boolean correcto = false;
 		Transaction t = s.beginTransaction();
 		try {
-			Roles r = new Roles(id, nombre);
+			Roles r = new Roles(nombre);
 			if(!RolesDao.consultarRol(s, id)) {
 				s.save(r);
 				t.commit();

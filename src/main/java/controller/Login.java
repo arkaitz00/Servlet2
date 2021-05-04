@@ -78,7 +78,7 @@ public class Login extends HttpServlet {
 		if(u != null) {
 			if(Cifrado.comprobarCifrado(password, u.getClave())){
 				HttpSession session = request.getSession(true);
-				session.setAttribute("rolUsuario", MetodosUtiles.nombreRol(u.getRoles()));
+				session.setAttribute("rolUsuario", MetodosUtiles.nombreRol(u.getIdRol()));
 				session.setAttribute("nombreUsuario", u.getNombre());
 				response.sendRedirect("Bienvenido.jsp");
 			}else {
