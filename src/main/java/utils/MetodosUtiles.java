@@ -1,6 +1,15 @@
 package main.java.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+
 public class MetodosUtiles {
+	
+	private static Logger logger = LogManager.getLogger(MetodosUtiles.class);
 	
 	public static String nombreRol(int idRol){
 		String nombreRol = "";
@@ -63,4 +72,11 @@ public class MetodosUtiles {
 		}
 		return mes;
 	}
+	
+	public static List<String> leerFichero(String ficheroUrl){
+		List<String> lista = new ArrayList<>();
+		
+		return lista;
+	}
 }
+

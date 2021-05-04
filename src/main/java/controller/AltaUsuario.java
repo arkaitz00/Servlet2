@@ -1,8 +1,6 @@
 package main.java.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.password.PasswordEncryptor;
 
@@ -80,7 +77,7 @@ public class AltaUsuario extends HttpServlet {
 			if(UsuariosDao.insertarUsuario(s, 2, email, passwordCifrado, nombre, apellido1, apellido2, direccion, localidad, provincia, telefono, dni)) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("nombreUsuario", nombre);
-				session.setAttribute("rolUsuario", MetodosUtiles.nombreRol(1));
+				session.setAttribute("rolUsuario", MetodosUtiles.nombreRol(2));
 				response.sendRedirect("Bienvenido.jsp");
 			}else {
 				response.sendRedirect("Registro.jsp");

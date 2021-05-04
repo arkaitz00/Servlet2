@@ -1,4 +1,8 @@
+<%@page import="main.java.utils.MetodosUtiles"%>
 <%@ page language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,18 +156,27 @@ margin-left: 4px;
 						</div>
 						<input type="password" class="form-control" placeholder="Direccion" name="direccion">
 					</div>
+					--> 
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="Localidad" name="localidad">
+						<select name="municipios">
+							<option value="escoger">Elige un municipio...</option>
+						</select>
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="Provincia" name="provincia">
+						<select name="provincias" class="form-select" aria-label="Default select example">
+							<option value="escoger" selected>Elige una provincia...</option>
+							<c:forEach items="">
+								<option value=""></option>
+							</c:forEach>
+						</select>
 					</div>
+					<!--
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
