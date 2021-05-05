@@ -18,7 +18,7 @@
 
 
 html,body{
-background-color: black;
+background-image: url("images/bg-Login.jpg");
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -118,7 +118,6 @@ margin-left: 4px;
 							<span class="input-group-text">&#128100;</span>
 						</div>
 						<input type="text" class="form-control" placeholder="Email" name="usuario">
-						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">

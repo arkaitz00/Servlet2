@@ -1,5 +1,7 @@
 package main.java.utils;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +77,12 @@ public class MetodosUtiles {
 	
 	public static List<String> leerFichero(String ficheroUrl){
 		List<String> lista = new ArrayList<>();
-		
+		try {
+			URL url = new URL(ficheroUrl);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return lista;
 	}
 }

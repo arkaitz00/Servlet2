@@ -22,7 +22,7 @@
 
 
 html,body{
-background-color: black;
+background-image: url("images/bg-Registro.jpg");
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -109,10 +109,10 @@ margin-left: 4px;
 </style>
 </head>	
 <body>
-	<div class="container">
-	<div class="d-flex justify-content-center">
-		<div class="card">
-			<div class="card-header h-100">
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card" style="height:750px">
+			<div class="card-header">
 				<h3>Registro</h3>
 			</div>
 			<div class="card-body">
@@ -121,22 +121,20 @@ margin-left: 4px;
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128231;</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Email" name="email">
-						
+						<input type="text" class="form-control" placeholder="Email" name="email" required>
 					</div>				
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128273;</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Contraseña" name="password">
+						<input type="password" class="form-control" placeholder="Contraseña" name="password" required>
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128100;</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Usuario" name="usuario">
-					</div>
-					<!-- 
+						<input type="text" class="form-control" placeholder="Usuario" name="usuario" required>
+					</div>					
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128100;</span>
@@ -146,20 +144,19 @@ margin-left: 4px;
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+							<span class="input-group-text">&#128100;</span>
 						</div>
 						<input type="password" class="form-control" placeholder="Segundo apellido" name="apellido2">
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+							<span class="input-group-text">&#127969;</span>
 						</div>
 						<input type="password" class="form-control" placeholder="Direccion" name="direccion">
 					</div>
-					--> 
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+							<span class="input-group-text">&#128725;</span>
 						</div>
 						<select name="municipios">
 							<option value="escoger">Elige un municipio...</option>
@@ -167,28 +164,23 @@ margin-left: 4px;
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+							<span class="input-group-text">&#127984;</span>
 						</div>
 						<select name="provincias" class="form-select" aria-label="Default select example">
-							<option value="escoger" selected>Elige una provincia...</option>
-							<c:forEach items="">
-								<option value=""></option>
-							</c:forEach>
+							<option value="escoger" selected>Elige una provincia...</option>							
 						</select>
 					</div>
-					<!--
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+							<span class="input-group-text">&#9742;</span>
 						</div>
 						<input type="password" class="form-control" placeholder="Numero de telefono" name="telefono">
 					</div>
-					 -->
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128179;</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Dni" name="dni">
+						<input type="text" class="form-control" placeholder="Dni" name="dni" required>
 					</div>
 					<div class="form-group">
 						<input type="submit" value="Registrate" class="btn float-right" style="background-color: #FFC312;">
