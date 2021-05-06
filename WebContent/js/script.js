@@ -144,7 +144,7 @@ function filtrarMunicipios() {
 				municipios[i].classList.add("hidden");
 			}
 		} else {
-			if (provincias == opcion.substring(0, 2) && opcion < 10000) {
+			if (provincias == opcion.substring(0, 2) && opcion >= 10000) {
 				municipios[i].classList.remove("hidden");
 			} else {
 				municipios[i].classList.add("hidden");

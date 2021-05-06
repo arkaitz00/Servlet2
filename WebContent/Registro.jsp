@@ -121,7 +121,7 @@ margin-left: 4px;
 				<h3>Registro</h3>
 			</div>
 			<div class="card-body">
-				<form id="registro" method="post" action="AltaUsuario" onsubmit="return validarFormulario()">
+				<form id="registro" method="post" action="AltaUsuario">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128231;</span>

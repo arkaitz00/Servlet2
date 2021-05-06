@@ -2,6 +2,7 @@ package main.java.service;
 
 import org.hibernate.Session;
 import main.java.model.dao.UsuariosDao;
+import main.java.model.entities.Usuarios;
 
 public class UsuariosService {
 	

@@ -67,17 +67,16 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String usuario, password;
+		String usuario, password, mensaje;
 		
 		usuario = request.getParameter("usuario");
 		password = request.getParameter("password");
 		
-		
+		HttpSession session = request.getSession(true);
 		
 		Usuarios u = UsuariosDao.devolverUsuarioEmail(s, usuario);
 		if(u != null) {
 			if(Cifrado.comprobarCifrado(password, u.getClave())){
-				HttpSession session = request.getSession(true);
 				session.setAttribute("rolUsuario", MetodosUtiles.nombreRol(u.getIdRol()));
 				session.setAttribute("nombreUsuario", u.getNombre());
 				response.sendRedirect("Bienvenido.jsp");
@@ -85,6 +84,8 @@ public class Login extends HttpServlet {
 				response.sendRedirect("Login.jsp");
 			}
 		}else {
+			mensaje= "Correo y/o contraseña incorrectos";
+			session.setAttribute("mensaje", mensaje);
 			logger.warn("El usuario no existe");
 			response.sendRedirect("Login.jsp");
 		}
