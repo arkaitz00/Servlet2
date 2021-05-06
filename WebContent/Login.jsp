@@ -12,6 +12,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/script.js"></script>
 <style>
 	/* Made with love by Mutiullah Samim*/
 
@@ -107,7 +108,7 @@ margin-left: 4px;
 <body>
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
-		<div class="card">
+		<div class="card" style="height: 500px">
 			<div class="card-header">
 				<h3>Inicio de sesion</h3>
 			</div>
@@ -117,16 +118,18 @@ margin-left: 4px;
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128100;</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Email" name="usuario">
+						<input id="emailLogin" type="text" class="form-control" placeholder="Email" name="usuario" onblur="validarCampos(this.id)" required>						
 					</div>
+					<p id="p1"></p>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128273;</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Contraseña" name="password">
+						<input id="passwordLogin" type="password" class="form-control" placeholder="Contraseña" name="password" onblur="validarCampos(this.id)" required>						
 					</div>
+					<p id="p2"></p>
 					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn">
+						<input id="btnLogin" type="submit" value="Login" class="btn float-right login_btn">
 					</div>
 				</form>
 			</div>

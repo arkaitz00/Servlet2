@@ -59,15 +59,13 @@ public class AltaUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		PasswordEncryptor encriptado = new BasicPasswordEncryptor();
-		
 		String email = request.getParameter("email");
 		String nombre = request.getParameter("usuario");
 		String password = request.getParameter("password");
 		String apellido1 = request.getParameter("apellido1");
 		String apellido2 = request.getParameter("apellido2");
 		String direccion = request.getParameter("direccion");
-		String localidad = request.getParameter("localidad");
+		String localidad = request.getParameter("municipio");
 		String provincia = request.getParameter("provincia");
 		String telefono = request.getParameter("telefono");
 		String dni = request.getParameter("dni");

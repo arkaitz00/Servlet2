@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="main.java.model.entities.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Login Tienda Arkaitz</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -16,6 +17,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/script.js"></script>
 <style>
 	/* Made with love by Mutiullah Samim*/
 
@@ -106,6 +108,9 @@ color: white;
 .links a{
 margin-left: 4px;
 }
+.hidden{
+	display: none;
+}
 </style>
 </head>	
 <body>
@@ -116,74 +121,94 @@ margin-left: 4px;
 				<h3>Registro</h3>
 			</div>
 			<div class="card-body">
-				<form method="post" action="AltaUsuario">
+				<form id="registro" method="post" action="AltaUsuario" onsubmit="return validarFormulario()">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128231;</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Email" name="email" required>
+						<input id="email" type="email" class="form-control" placeholder="Email" name="email" onblur="validarCampos(this.id)" required>
 					</div>				
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128273;</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Contraseña" name="password" required>
+						<input id="password" type="password" class="form-control" placeholder="Contraseña" name="password" onblur="validarCampos(this.id)" required>
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128100;</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Usuario" name="usuario" required>
+						<input id="usuario" type="text" class="form-control" placeholder="Usuario" name="usuario" onblur="validarCampos(this.id)" required>
 					</div>					
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128100;</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Primer apellido" name="apellido1">
+						<input id="apellido1" type="text" class="form-control" placeholder="Primer apellido" name="apellido1" onblur="validarCampos(this.id)">
 					
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128100;</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Segundo apellido" name="apellido2">
+						<input id="apellido2" type="text" class="form-control" placeholder="Segundo apellido" name="apellido2" onblur="validarCampos(this.id)">
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#127969;</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Direccion" name="direccion">
-					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text">&#128725;</span>
-						</div>
-						<select name="municipios">
-							<option value="escoger">Elige un municipio...</option>
-						</select>
+						<input id="direccion" type="text" class="form-control" placeholder="Direccion" name="direccion" onblur="validarCampos(this.id)">
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#127984;</span>
 						</div>
-						<select name="provincias" class="form-select" aria-label="Default select example">
-							<option value="escoger" selected>Elige una provincia...</option>							
+						<%
+							Provincia[] listadoProvincias = MetodosUtiles.leerProvincias();  
+						%>	
+						<select id="provincias"  name="provincia" class="form-select" aria-label="Default select example" onchange="filtrarMunicipios()">
+							<option value="escogerProvincia" placeholder="" selected>Elige una provincia...</option>
+						<%
+							for(Provincia provincia: listadoProvincias){								
+						%>
+								<option id="<%= provincia.getId() %>" name="<%= provincia.getId() %>" value="<%= provincia.getNombre() %>"><%= provincia.getNombre() %></option>
+						<%
+							}
+						%>						
+						</select>
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">&#128725;</span>
+						</div>
+						<%
+							Municipio[] listadoMunicipios = MetodosUtiles.leerMunicipios();  
+						%>	
+						<select id="municipios" class="form-select" aria-label="Default select example" style="width: 61.8%">
+							<option value="escogerMunicipio" selected>Elige un munipio...</option>
+						<%
+							for(Municipio municipio: listadoMunicipios){								
+						%>
+						 <option class="hidden" id="<%= municipio.getId() %>" value="<%= municipio.getNombre() %>"><%= municipio.getNombre() %></option>
+						<%
+							}
+						%>	
 						</select>
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#9742;</span>
 						</div>
-						<input type="password" class="form-control" placeholder="Numero de telefono" name="telefono">
+						<input id="telefono" type="text" class="form-control" placeholder="Numero de telefono" name="telefono" onblur="validarCampos(this.id)">
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text">&#128179;</span>
 						</div>
-						<input type="text" class="form-control" placeholder="Dni" name="dni" required>
+						<input id="dni" type="text" class="form-control" placeholder="Dni" name="dni" onblur="validarCampos(this.id)" required>
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Registrate" class="btn float-right" style="background-color: #FFC312;">
+						<input id="btnRegistro" type="submit" value="Registrate" class="btn float-right" style="background-color: #FFC312;">
 					</div>
 				</form>
 			</div>
